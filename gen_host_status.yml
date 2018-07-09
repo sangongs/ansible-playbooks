@@ -32,5 +32,8 @@
         - debug: msg="ε-(´・｀) ﾌ"
 
     - name: Reach out to the unreachable hosts
-      ping:
+      block:
+        - ping:
+          vars:
+            ansible_host: 'invalid.invalid'
       when: "'_unreachable' in ansible_host"
