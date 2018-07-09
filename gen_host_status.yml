@@ -41,4 +41,4 @@
         - ping:
           vars:
             ansible_host: 'invalid.invalid'
-      when: unreachable
+      when: unreachable is defined and unreachable
