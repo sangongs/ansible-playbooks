@@ -31,9 +31,14 @@
       rescue:
         - debug: msg="ε-(´・｀) ﾌ"
 
+    - name: Set unreachable fact
+      set_fact: 
+        unreachable: true
+      when: "'_unreachable' in ansible_host"
+
     - name: Reach out to the unreachable hosts
       block:
         - ping:
           vars:
             ansible_host: 'invalid.invalid'
-      when: "'_unreachable' in ansible_host"
+      when: unreachable is defined and unreachable is true
